@@ -37,4 +37,4 @@ http server started on [::]:8080
 ```
 que indicará que la api está lista para ser usada.  
 
-Todos los endpoints están definidos en la siguiente [Colección de Postman](https://www.postman.com/dvillarruel/workspace/accelone/collection/4793868-dd52f49f-4b07-447b-b37a-c611ba3799e7?action=share&creator=4793868)
+Todos los endpoints están definidos en la siguiente [Colección de Postman](https://www.postman.com/dvillarruel/workspace/yuno/collection/4793868-dd52f49f-4b07-447b-b37a-c611ba3799e7?action=share&creator=4793868)
