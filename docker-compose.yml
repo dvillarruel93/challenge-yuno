@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d postgres || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
+  api:
+    build:
+      context: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=postgres
+      - ENVIRONMENT=local
+    volumes:
+      - ./config:/app/config 
+    ports:
+      - "8080:8080"
+    command: >
+      sh -c "wait-for-it postgres:5432 -- 
+            ./api"
+
+volumes:
+  postgres_data:
